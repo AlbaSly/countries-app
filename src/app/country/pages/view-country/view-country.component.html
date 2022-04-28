@@ -1,0 +1,97 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+  <div [hidden]="!isLoading">
+    <app-spinner class="block mt-10"></app-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && !countryFound; else countryTemplate">
+    <app-not-found></app-not-found>
+  </div>
+
+  <ng-template #countryTemplate>
+    <div *ngIf="country">
+      <h1 class="text-center uppercase text-3xl text-gray-300 mt-2">{{country.name.common}}</h1>
+
+      <main id="country-view-main" class="mt-5 bg-gray-600 shadow-2xl p-4 rounded-xl w-11/12 mx-auto">
+
+        <div class="md:flex gap-2">
+
+          <section id="country-pictures" class="md:w-1/3 p-4 bg-gray-500 rounded-xl shadow-2xl">
+            <h3 class="text-center uppercase font-bold text-gray-200">Pictures</h3>
+            <div id="flag">
+              <h4 class="text-center uppercase font-bold text-gray-200">Flag</h4>
+              <div [hidden]="!flagIsLoading">
+                <app-spinner></app-spinner>
+              </div>
+              <img [hidden]="flagIsLoading" (load)="flagIsLoading=false" [src]="country.flags.png" alt="flag" class="w-48 mx-auto">
+            </div>
+
+            <div id="coat-of-arms" class="mt-2.5">
+              <h4 class="text-center uppercase font-bold text-gray-200">Coat of Arms</h4>
+              <div [hidden]="!coatIsLoading">
+                <app-spinner class="block mt-10"></app-spinner>
+              </div>
+              <img [hidden]="coatIsLoading" (load)="coatIsLoading=false" [src]="country.coatOfArms.png" alt="coat of arms" class="w-48 mx-auto">
+            </div>
+          </section>
+
+          <section id="country-info" class="md:w-2/3 p-4 mt-2.5 md:mt-0 bg-gray-500 rounded-xl shadow-2xl">
+            <h3 class="text-center uppercase font-bold text-gray-200">Information</h3>
+            <ul class="uppercase text-white">
+              <li>Official Name: <strong>{{country.name.official}}</strong></li>
+              <li>Common Name: <strong>{{country.name.common}}</strong></li>
+              <li>
+                Native Name
+                <ul *ngFor="let transcription of getTranscriptionsOfCountryName();" class="ml-4">
+                  <li>
+                    Language Code: <strong>{{transcription.languageCode}}</strong>
+                    <ul class="ml-4">
+                      <li>Common: <strong>{{transcription.common}}</strong></li>
+                      <li>Official: <strong>{{transcription.official}}</strong></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Capital: <strong>{{country.capital}}</strong></li>
+              <li>Languages:
+                <ul class="ml-4">
+                  <li *ngFor="let language of Object_.values(country.languages) | keyvalue">
+                    <strong>{{Object_.values(language)[1]}}</strong>
+                  </li>
+                </ul>
+              </li>
+              <li>Region: <strong>{{country.region}}</strong>
+                <ul class="ml-4">
+                  <li>Subregion: <strong>{{country.subregion}}</strong></li>
+                </ul>
+              </li>
+              <li>Population: <strong>{{country.population | number}}</strong></li>
+            </ul>
+          </section>
+
+        </div>
+
+        <div class="md:flex gap-2">
+
+          <section class="mt-2.5 p-4 bg-gray-500 rounded-xl shadow-2xl">
+            <h3 class="text-center uppercase font-bold text-gray-200">Translations (Common Name)</h3>
+            <ul class="flex flex-wrap gap-2">
+              <li *ngFor="let translation of country.translations | keyvalue" class="p-2 bg-blue-500 text-white rounded-xl shadow-lg">
+                {{Object_.values(translation)[1]['common']}} ({{Object_.values(translation)[0]}})
+              </li>
+            </ul>
+          </section>
+
+          <section class="mt-2.5 p-4 bg-gray-500 rounded-xl shadow-2xl">
+            <h3 class="text-center uppercase font-bold text-gray-200">Translations (Official Name)</h3>
+            <ul class="flex flex-wrap gap-2">
+              <li *ngFor="let translation of country.translations | keyvalue" class="p-2 bg-yellow-500 text-white rounded-xl shadow-lg">
+                {{Object_.values(translation)[1]['official']}} ({{Object_.values(translation)[0]}})
+              </li>
+            </ul>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </ng-template>
+</div>

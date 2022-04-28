@@ -1,1 +1,75 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  transition: all .2s ease-in;
+
+  &::before {
+    transition: all .2s ease-in;
+  }
+
+  &::after {
+    transition: all .2s ease-in;
+  }
+}
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+    scrollbar-color: #c084fc #2e2e2e;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #2e2e2e;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #c084fc;
+    border-radius: 16px;
+    border: 1px solid #c084fc;
+  }
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+html {
+  overflow-y: scroll;
+}
+
+html, body {
+
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+input, textarea {
+  outline: none;
+}
+
+img {
+  animation: fade-in .4s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

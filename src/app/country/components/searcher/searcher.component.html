@@ -1,0 +1,14 @@
+<form (ngSubmit)="search();"
+  autocomplete="false"
+  class="text-center">
+
+  <input
+    autocomplete="off"
+    type="text"
+    name="searchTerm"
+    class="p-4 bg-gray-200 rounded-xl w-10/12"
+    [(ngModel)]="searchTerm"
+    (input)="keyPressed();"
+    [placeholder]="placeholder">
+
+</form>

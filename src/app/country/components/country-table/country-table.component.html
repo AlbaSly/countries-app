@@ -1,0 +1,24 @@
+<table class="w-10/12 mx-auto bg-gray-800 text-white">
+  <thead class="border-b-2">
+    <tr>
+      <th class="w-1/10 border-2">#</th>
+      <th class="w-2/10 border-2">Flag</th>
+      <th class="w-3/10 border-2">Name</th>
+      <th class="w-3/10 border-2">Population</th>
+      <th class="w-1/10 border-2">Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let country of countryList;let i = index;" class="hover:bg-gray-400 animate__animated animate__fadeIn animate__faster">
+      <td class="w-1/10 text-center">{{i+1}}</td>
+      <td class="w-2/10">
+        <img [src]="country.flags.png" [alt]="(country.name.common)" class="w-16 mx-auto">
+      </td>
+      <td class="w-3/10">{{country.capital ?? 'Unknown Capital'}}, {{country.name.common ?? country.name}}</td>
+      <td class="w-3/10 text-center">{{country.population | number}}</td>
+      <td class="w-1/10 text-center">
+        <a [routerLink]="['/country/', (country.cca2 ?? country.alpha2Code)]" class="text-blue-600 hover:text-blue-800 font-bold">View Info</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

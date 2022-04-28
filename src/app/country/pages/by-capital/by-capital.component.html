@@ -1,0 +1,32 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+  <h1 class="text-center uppercase text-3xl text-gray-300 mt-2">By Capital City</h1>
+
+  <div class="w-full mt-2.5">
+    <app-searcher
+      (onEnter)="search($event);"
+      (onDebounce)="suggestions($event)"
+      placeholder="Search Capital..."
+    ></app-searcher>
+    <ul class="w-10/12 mx-auto relative -top-2">
+      <li *ngFor="let country of suggestedCountries" class="p-1 bg-gray-100 hover:bg-blue-500">
+        <a [routerLink]="['/country/', country.cca2]" class="block">
+          {{country.capital}}, {{country.name.common}}
+        </a>
+      </li>
+      <li *ngIf="searchTerm" class="p-1 bg-gray-200 hover:bg-gray-300">
+        Buscar <span (click)="search(searchTerm);" class="text-blue-500 underline hover:cursor-pointer">{{searchTerm}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="errorFound;" class="p-2 mb-2.5 mt-5 text-center font-bold bg-red-400 text-red-800 w-1/2 mx-auto">
+    Capital City not found... ({{searchTerm}})
+  </div>
+
+  <hr *ngIf="!errorFound;" class="my-5 w-10/12 mx-auto">
+
+  <div *ngIf="!errorFound && countryList.length;" class="mt-2.5">
+    <app-country-table [countries-data]="countryList"></app-country-table>
+  </div>
+
+</div>

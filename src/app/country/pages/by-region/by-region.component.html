@@ -1,0 +1,22 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+  <h1 class="text-center uppercase text-3xl text-gray-300 mt-2">By Region</h1>
+
+  <div class="w-full mt-2.5 flex flex-col md:flex-row gap-2 mx-auto justify-center">
+    <!-- [class.selected]="regionSelected === region" -->
+    <!-- [ngClass]="{
+      'bg-red-500': regionSelected === region,
+      'bg-blue-500': regionSelected !== region
+    }" -->
+    <button
+    (click)="regionSelected=region; showRegion();"
+    *ngFor="let region of regions"
+    [class]="getCssButtonClasses(region)"
+    class="p-2 rounded-xl shadow-md text-white md:w-1/6"
+    >{{region | titlecase}}</button>
+  </div>
+
+  <div *ngIf="countriesList.length > 0" class="mt-2.5">
+    <app-country-table [countries-data]="countriesList"></app-country-table>
+  </div>
+
+</div>

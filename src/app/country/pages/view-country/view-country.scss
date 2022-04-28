@@ -1,0 +1,18 @@
+
+#country-info {
+  li {
+    padding: 5px;
+    transition: all .2s ease-in;
+    color: #7BD8F1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+
+    &:hover {
+      filter: brightness(85%);
+      cursor: pointer;
+    }
+    & strong {
+      color: #7BE495;
+    }
+  }
+
+}

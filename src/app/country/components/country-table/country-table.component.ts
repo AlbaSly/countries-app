@@ -1,0 +1,11 @@
+import { Component, Input } from "@angular/core";
+import { Country } from "../../interfaces/country.interfaces";
+
+@Component({
+  selector: 'app-country-table',
+  templateUrl: 'country-table.component.html'
+})
+export class CountryTableComponent {
+  @Input('countries-data')
+  public countryList: Country[] = []
+}

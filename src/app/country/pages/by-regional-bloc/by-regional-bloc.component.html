@@ -1,0 +1,24 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+  <h1 class="text-center uppercase text-3xl text-gray-300 mt-2">By Regional Bloc</h1>
+
+  <div class="w-full mt-2.5 flex flex-wrap gap-2 justify-center">
+    <!-- [class.selected]="regionSelected === region" -->
+    <!-- [ngClass]="{
+      'bg-red-500': regionSelected === region,
+      'bg-blue-500': regionSelected !== region
+    }" -->
+    <button
+    (click)="regionalBlocSelected=regionalBloc; showRegion();"
+    *ngFor="let regionalBloc of regionalBlocs"
+    [class]="getCssButtonClasses(regionalBloc.code)"
+    class="p-2 rounded-xl shadow-md text-white sm:w-1/6"
+    >{{regionalBloc.code}}</button>
+  </div>
+
+  <h2 *ngIf="regionalBlocSelected.code" class="mt-2.5 text-gray-200 text-2xl text-center">{{regionalBlocSelected.fullName}} ({{regionalBlocSelected.code}})</h2>
+
+  <div *ngIf="countriesList.length > 0" class="mt-2.5">
+    <app-country-table [countries-data]="countriesList"></app-country-table>
+  </div>
+
+</div>
